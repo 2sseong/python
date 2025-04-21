@@ -1,0 +1,195 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh\r\nhostname -I`",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 02:07:39.646",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionSupport": false
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "172.19.0.2 172.22.0.4 \n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745197979040_1547507848",
+      "id": "paragraph_1745197979040_1547507848",
+      "dateCreated": "2025-04-21 01:12:59.040",
+      "dateStarted": "2025-04-21 02:07:37.638",
+      "dateFinished": "2025-04-21 02:07:37.650",
+      "status": "FINISHED"
+    },
+    {
+      "text": "%sh\n# pip uninstall kafka-python -y\npip install kafka-python\n\n",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 02:07:42.744",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionSupport": false
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "Requirement already satisfied: kafka-python in /opt/conda/envs/python_3_with_R/lib/python3.9/site-packages (2.1.5)\nWARNING: Running pip as the \u0027root\u0027 user can result in broken permissions and conflicting behaviour with the system package manager, possibly rendering your system unusable. It is recommended to use a virtual environment instead: https://pip.pypa.io/warnings/venv. Use the --root-user-action option if you know what you are doing and want to suppress this warning.\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745200487391_1391081149",
+      "id": "paragraph_1745200487391_1391081149",
+      "dateCreated": "2025-04-21 01:54:47.391",
+      "dateStarted": "2025-04-21 02:07:42.752",
+      "dateFinished": "2025-04-21 02:07:43.334",
+      "status": "FINISHED"
+    },
+    {
+      "text": "from kafka import KafkaProducer\r\n\r\nimport json\r\nimport time\r\n\r\nproducer \u003d KafkaProducer(\r\n    bootstrap_servers \u003d \u0027kafka:9092\u0027,\r\n    value_serializer \u003d lambda v: json.dumps(v).encode(\u0027utf-8\u0027)\r\n)\r\nnum \u003d 0\r\nhow \u003d 1000\r\ndelay \u003d 1\r\n\r\n# 테스트용 스마트카 데이터\r\ndef generate_smartcar_data():\r\n    import random\r\n    return{\r\n        \"car_id\": f\"{num}/{how}\" , # 임의의 자동차 아이디\r\n        \"speed\": round(random.uniform(80,100),2), # 차량의 임의속도 (km/h)\r\n        \"latitude\": round(random.uniform(34,36),2), # 위도\r\n        \"longitude\": round(random.uniform(124,126),2), # 경도\r\n        \"timestamp\": time.time()\r\n    }\r\n\r\nif __name__ \u003d\u003d \"__main__\":\r\n    try:\r\n        for r in range(how):\r\n            data \u003d generate_smartcar_data()\r\n            \r\n            producer.send(\"smart-car\",value\u003ddata) #topic에 data 담아서 보내기\r\n            print(f\u0027Send:{data}\u0027) # 우리가 보는 데이터\r\n            time.delay(delay)\r\n\r\n    except:\r\n        print(\"에러발생\")\r\n    finally:\r\n        producer.close()\r\n",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 02:07:46.992",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "python",
+          "editOnDblClick": false,
+          "completionSupport": true
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "ERROR",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "\u001b[0;31m---------------------------------------------------------------------------\u001b[0m\n\u001b[0;31mImportError\u001b[0m                               Traceback (most recent call last)\nCell \u001b[0;32mIn[25], line 1\u001b[0m\n\u001b[0;32m----\u003e 1\u001b[0m \u001b[38;5;28;01mfrom\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21;01mkafka\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;28;01mimport\u001b[39;00m KafkaProducer\n\u001b[1;32m      3\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21;01mjson\u001b[39;00m\n\u001b[1;32m      4\u001b[0m \u001b[38;5;28;01mimport\u001b[39;00m\u001b[38;5;250m \u001b[39m\u001b[38;5;21;01mtime\u001b[39;00m\n\n\u001b[0;31mImportError\u001b[0m: cannot import name \u0027KafkaProducer\u0027 from \u0027kafka\u0027 (unknown location)"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745198277597_1571327012",
+      "id": "paragraph_1745198277597_1571327012",
+      "dateCreated": "2025-04-21 01:17:57.597",
+      "dateStarted": "2025-04-21 02:07:47.002",
+      "dateFinished": "2025-04-21 02:07:47.062",
+      "status": "ERROR"
+    },
+    {
+      "text": "%sh \r\npip list | grep kafka-python\r\n\r\n\r\n",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 02:04:59.167",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionSupport": false
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "kafka-python              2.1.5\n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745200454124_1175312155",
+      "id": "paragraph_1745200454124_1175312155",
+      "dateCreated": "2025-04-21 01:54:14.124",
+      "dateStarted": "2025-04-21 02:04:59.175",
+      "dateFinished": "2025-04-21 02:04:59.393",
+      "status": "FINISHED"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 02:00:13.324",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745200800365_775918701",
+      "id": "paragraph_1745200800365_775918701",
+      "dateCreated": "2025-04-21 02:00:00.365",
+      "status": "READY"
+    }
+  ],
+  "name": "ju02",
+  "id": "2KSNBJN4H",
+  "defaultInterpreterGroup": "python",
+  "version": "0.12.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}

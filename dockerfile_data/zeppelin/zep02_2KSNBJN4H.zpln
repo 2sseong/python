@@ -1,0 +1,78 @@
+{
+  "paragraphs": [
+    {
+      "text": "%sh\r\nhostname -I",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 01:18:02.637",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {
+          "language": "sh",
+          "editOnDblClick": false,
+          "completionSupport": false
+        }
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "results": {
+        "code": "SUCCESS",
+        "msg": [
+          {
+            "type": "TEXT",
+            "data": "172.21.0.2 \n"
+          }
+        ]
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745197979040_1547507848",
+      "id": "paragraph_1745197979040_1547507848",
+      "dateCreated": "2025-04-21 01:12:59.040",
+      "dateStarted": "2025-04-21 01:18:02.646",
+      "dateFinished": "2025-04-21 01:18:02.706",
+      "status": "FINISHED"
+    },
+    {
+      "text": "",
+      "user": "anonymous",
+      "dateUpdated": "2025-04-21 01:18:13.439",
+      "progress": 0,
+      "config": {
+        "colWidth": 12.0,
+        "fontSize": 9.0,
+        "results": {},
+        "enabled": true,
+        "editorSetting": {}
+      },
+      "settings": {
+        "params": {},
+        "forms": {}
+      },
+      "apps": [],
+      "runtimeInfos": {},
+      "progressUpdateIntervalMs": 500,
+      "jobName": "paragraph_1745198277597_1571327012",
+      "id": "paragraph_1745198277597_1571327012",
+      "dateCreated": "2025-04-21 01:17:57.597",
+      "status": "READY"
+    }
+  ],
+  "name": "ju02",
+  "id": "2KSNBJN4H",
+  "defaultInterpreterGroup": "python",
+  "version": "0.12.0",
+  "noteParams": {},
+  "noteForms": {},
+  "angularObjects": {},
+  "config": {
+    "isZeppelinNotebookCronEnable": false
+  },
+  "info": {}
+}
