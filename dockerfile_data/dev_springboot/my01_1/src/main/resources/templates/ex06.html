@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ko" xmlns="http: //www.thymeleaf.org">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      table {
+        width: 700px;
+      }
+      tr,
+      td,
+      th {
+        background-color: gray;
+        color: white;
+        width: 33%;
+        box-shadow: 10px 10px 25px rgba(0, 0, 0, 0.5);
+      }
+    </style>
+  </head>
+  <body>
+    <div th:replace="~{fragments/gohome:: goToHome}"></div>
+    <h1>붕어빵</h1>
+
+    <!-- <span th:text="${BungBbang.pbbang}">뭐</span> -->
+    <table border="1">
+      <tr>
+        <th>번호</th>
+        <th>맛</th>
+        <th>가격</th>
+        <th>제조일</th>
+      </tr>
+      <tr th:each="bung, stat:${bungs}">
+        <td th:text="${stat.count} + '번'">번호data</td>
+        <td th:text="${bung.flavor}">맛data</td>
+        <td th:text="${bung.price} + '원'">가격data</td>
+        <!-- <td th:text="${bung.birthData}">제조일data</td> -->
+        <td th:text="${#temporals.format(bung.madeDate,'yyyy-mm-dd')}">
+          제조일data
+        </td>
+      </tr>
+    </table>
+    <div th:replace="~{fragments/footer::myFooter}"></div>
+  </body>
+</html>

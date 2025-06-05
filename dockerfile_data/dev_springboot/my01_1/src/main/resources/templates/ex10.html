@@ -1,0 +1,200 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <style>
+      body {
+        font-family: sans-serif;
+        margin: 0;
+        background-color: azure;
+        padding: 2rem;
+      }
+      .chat-container {
+        width: 100%;
+        box-sizing: border-box;
+        /* height: 500px; */
+        /* transform: translateY(50%); */
+        margin: auto;
+        background-color: white;
+        padding: 1rem 3rem 0 4rem;
+        border-radius: 15px 15px 0 0;
+        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.6);
+        display: flex;
+        flex-direction: column;
+        overflow-y: auto;
+        flex: 7;
+      }
+
+      .chat-input {
+        flex: 1;
+        width: 100%;
+        background-color: white;
+        display: flex;
+        justify-content: stretch;
+      }
+
+      textarea {
+        width: 70%;
+        outline: none;
+        border: none;
+        background-color: aliceblue;
+        resize: none;
+        padding: 30px;
+        font-size: 1.2rem;
+        color: rgb(73, 66, 141);
+        font-weight: bold;
+        border-radius: 0 0 0 10px;
+      }
+      button {
+        width: 30%;
+        font-weight: bold;
+        font-size: 1.2rem;
+        border: none;
+        background-color: rgb(245, 245, 77);
+        cursor: pointer;
+      }
+
+      .message {
+        display: flex;
+        margin-bottom: 1.2rem;
+        align-items: end;
+      }
+      .message.bot {
+        justify-content: start;
+      }
+      .message.user {
+        justify-content: end;
+      }
+      .bubble {
+        max-width: 300px;
+        position: relative;
+        background-color: blueviolet;
+        padding: 0.7rem 1rem;
+        border-radius: 20px;
+        word-break: break-word;
+        white-space: pre-line;
+      }
+      .name {
+        font-size: 0.8rem;
+        color: #555;
+        margin: 0 10px 2px;
+      }
+      .user .bubble {
+        background-color: yellow;
+      }
+      .user .name {
+        text-align: right;
+      }
+
+      .chat-container::-webkit-scrollbar {
+        background-color: rgb(209, 9, 9);
+      }
+      .chat-container::-webkit-scrollbar-thumb {
+        background-color: rgb(190, 185, 255);
+        border-radius: 6px;
+      }
+      .box {
+        width: 500px;
+        height: 600px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        background-color: aliceblue;
+      }
+      .icon {
+        background-color: rgba(0, 0, 0, 0.253);
+        border-radius: 50%;
+        width: 40px;
+        height: 40px;
+        text-align: center;
+      }
+      .profile {
+        display: flex;
+        justify-content: end;
+        align-items: center;
+        margin: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div th:replace="~{fragments/gohome::goToHome}"></div>
+    <!-- div.chat-container>div.message.bot>div.avatar>div.name{myBot}+div.bubble{안녕하세요. 무엇을 도와드릴까요}^^div.message.user>div.avatar>div.name{myBot}+div.bubble{안녕하세요. 무엇을 도와드릴까요} -->
+    <div class="box">
+      <div class="chat-container">
+        <div class="message bot">
+          <div>
+            <div class="name">myBot</div>
+            <div class="bubble">안녕하세요. 무엇을 도와드릴까요</div>
+          </div>
+        </div>
+        <!-- <div class="message user">
+          <div>
+            <div class="profile">
+              <div class="name">나</div>
+              <div class="icon">프사</div>
+            </div>
+            <div class="bubble">가나다라마바사아자차카타파하</div>
+          </div>
+        </div> -->
+      </div>
+
+      <div class="chat-input">
+        <textarea
+          name=""
+          id="text-area"
+          placeholder="메시지를 입력하세요"
+        ></textarea
+        ><button id="send-btn">테스트22</button>
+      </div>
+    </div>
+
+    <script>
+      const sendBtn = document.getElementById("send-btn");
+      const textArea = document.querySelector("#text-area");
+      const chatContainer = document.querySelector(".chat-container");
+
+      const sendMessage = () => {
+        const userMessage = textArea.value.trim(); // 빈칸 없애기
+        if (userMessage) {
+          console.log(userMessage);
+          const userDiv = document.createElement("div");
+          userDiv.className = "message user";
+          chatContainer.appendChild(userDiv);
+          userDiv.innerHTML = `<div><div class="profile"><div class="name">나</div><div class="icon">프사</div></div><div class="bubble">${userMessage}</div></div></div>`;
+          textArea.value = ""; // 전송하고 입력창 비우기
+          chatContainer.scrollTop = chatContainer.scrollHeight; // 스크롤을 맨 아래로 이동
+        }
+
+        fetch("/final_chatbot", {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ message: userMessage }),
+        })
+          .then((res) => res.json())
+          .then((data) => {
+            console.log(data);
+            const botDiv = document.createElement("div");
+            botDiv.className = "message bot";
+            botDiv.innerHTML = `<div><div class="profile"><div class="name">myBot</div><div class="icon">프사</div></div><div class="bubble">${data.reply}</div></div></div>`;
+            chatContainer.appendChild(botDiv);
+            chatContainer.scrollTop = chatContainer.scrollHeight;
+          });
+      };
+
+      /* 전송버튼 클릭*/
+      sendBtn.addEventListener("click", sendMessage);
+
+      /* 엔터로 전송*/
+      textArea.addEventListener("keydown", (event) => {
+        console.log(event);
+        if (event.key === "Enter" && !event.shiftKey) {
+          // if (event.key === "Enter" && event.key !== "Shift") {
+          event.preventDefault(); // 한칸내리는 기능 방지
+          sendMessage(); //메세지 전송
+        }
+      });
+    </script>
+  </body>
+</html>
