@@ -19,7 +19,7 @@ public class My01Controller {
     @GetMapping("/")
     public String mainPage(Model model) {
         List<String> pageNames = List.of("model", "increase", "fragments", "if", "DTO1", "DTO2", "GET_querystring",
-                "GET_pathvariable", "POST_formdata", "final_chatbot");
+                "GET_pathvariable", "POST_formdata", "final_chatbot", "final_chatbot2");
         model.addAttribute("pages", pageNames);
         return "index"; // templates/index.html
 
@@ -146,6 +146,11 @@ public class My01Controller {
     @GetMapping("/final_chatbot")
     public String ex10Chat(Model model) {
         return "ex10";
+    }
+
+    @GetMapping("/final_chatbot2")
+    public String ex10aChat(Model model) {
+        return "ex10a";
     }
 
 }

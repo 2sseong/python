@@ -8,9 +8,15 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.pknu.my01_1.dto.ChatRequest;
+import com.pknu.my01_1.service.OpenAiService;
 
 @RestController
 public class My02Controller {
+    private final OpenAiService openAiService;
+
+    public My02Controller(OpenAiService openAiService) {
+        this.openAiService = openAiService;
+    }
 
     @PostMapping("/final_chatbot")
     @ResponseBody
@@ -24,7 +30,25 @@ public class My02Controller {
         } else if ("배고파".equals(message)) {
             answer = "밥먹으세요";
         } else {
-            answer = "뭔말인지 모르겠음";
+            answer = openAiService.ask(message);
+        }
+
+        return Map.of("reply", answer);
+    }
+
+    @PostMapping("/final_chatbot2")
+    @ResponseBody
+    public Map<String, String> chat2(@RequestBody ChatRequest request) {
+
+        System.out.println(request.getMessage());
+        String message = request.getMessage();
+        String answer;
+        if ("안녕".equals(message)) {
+            answer = "반가워요";
+        } else if ("배고파".equals(message)) {
+            answer = "밥먹으세요";
+        } else {
+            answer = openAiService.ask(message);
         }
 
         return Map.of("reply", answer);

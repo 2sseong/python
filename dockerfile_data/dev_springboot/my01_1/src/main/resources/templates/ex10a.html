@@ -169,7 +169,7 @@
           chatContainer.scrollTop = chatContainer.scrollHeight; // 스크롤을 맨 아래로 이동
         }
 
-        fetch("/final_chatbot", {
+        fetch("/final_chatbot2", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
           body: JSON.stringify({ message: userMessage }),
@@ -179,8 +179,16 @@
             console.log(data);
             const botDiv = document.createElement("div");
             botDiv.className = "message bot";
-            botDiv.innerHTML = `<div><div class="profile"><div class="name">myBot</div><div class="icon">프사</div></div><div class="bubble">${data.reply}</div></div></div>`;
+            botDiv.innerHTML = `<div><div class="profile"><div class="name">myBot</div><div class="icon">프사</div></div><div class="bubble">타이핑중...</div></div></div>`;
             chatContainer.appendChild(botDiv);
+            if (`${data.reply}`) {
+              botDiv.innerHTML = `<div><div class="profile"><div class="name">myBot</div><div class="icon">프사</div></div><div class="bubble">${data.reply}</div></div></div>`;
+              data.reply = "";
+            }
+            // const botDiv2 = document.createElement("div");
+            // botDiv2.className = "message bot";
+            // botDiv2.innerHTML = `<div><div class="profile"><div class="name">myBot</div><div class="icon">프사</div></div><div class="bubble">${data.reply}</div></div></div>`;
+            // chatContainer.appendChild(botDiv2);
             chatContainer.scrollTop = chatContainer.scrollHeight;
           });
       };
