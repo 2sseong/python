@@ -1,3 +1,3 @@
-const LocalStorage = () => <h1>로컬스토리지에서 작성중...</h1>
+const LocalStorage = () => <h1>VITE_01에서 작성예정</h1>
 
 export default LocalStorage
