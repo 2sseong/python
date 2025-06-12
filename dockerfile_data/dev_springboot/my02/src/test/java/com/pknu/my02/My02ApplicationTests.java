@@ -1,10 +1,10 @@
-package com.pknu.my01;
+package com.pknu.my02;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class My01ApplicationTests {
+class My02ApplicationTests {
 
 	@Test
 	void contextLoads() {
