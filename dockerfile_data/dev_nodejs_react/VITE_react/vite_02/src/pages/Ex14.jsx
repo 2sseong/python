@@ -1,6 +1,6 @@
 import { useState } from 'react'
-import axios from 'axios'
-const url = "https://api.thecatapi.com/v1/images/search?limit=10"
+import axios from 'axios' // 설치
+const url = "https://api.thecatapi.com/v1/images/search?limit=10" // 고양이사진
 
 
 const Axi = () => {
@@ -9,7 +9,7 @@ const Axi = () => {
     const [odata, setOdata] = useState([])
 
     const handleInput = e => {
-        setSdata(pre => ({ ...pre, [e.target.name]: e.target.value }))
+        setSdata(pre => ({ ...pre, [e.target.name]: e.target.value })) //업데이트
     }
 
 
@@ -34,16 +34,16 @@ const Axi = () => {
             <div>
                 <button onClick={myApi}>내 서버에서 수신</button>
                 <div>내 서버에서 받은 값</div>
-                <div>{mydata}</div>
+                <div>{JSON.stringify(mydata)}</div>
             </div>
             <hr />
             <div>
                 <button onClick={catApi}>외부 서버에서 수신</button>
                 <div>외부 서버에서 받은 값</div>
                 {/* <div>{JSON.stringify(odata)}</div> */}
-                {odata.map((v, i) => {
+                {odata && odata.map((v, i) => {
                     return (
-                        <img src={v.url} alt={i} width={200} height={200} style={{ objectFit: "cover", margin: "5px", borderRadius: "10px" }} />
+                        <img key={i} src={v.url} alt={i} width={200} height={200} style={{ objectFit: "cover", margin: "5px", borderRadius: "10px" }} />
                     )
                 })}
             </div>

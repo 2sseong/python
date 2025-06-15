@@ -3,19 +3,23 @@ import table from "./Ex12.data"
 import css from './Ex12.module.css'
 
 const Table = () => {
-    const [ea, setEa] = useState(Array(table.length))
+    const [ea, setEa] = useState(Array(table.length).fill(0))
 
     const handleNum = (e) => {
-        const index = e.target.id
+        const id = e.target.id
         const value = e.target.value
         const newEa = [...ea]
         newEa[id] = value
+        console.log({ newEa })
         setEa(newEa)
     }
+    const totalSum = table.reduce((sum, v, i) => {
+        return sum + (v.price * ea[i] + (ea[i] > 0 ? v.delivery_price : 0));
+    }, 0);
 
     return (
         <>
-            <h1>12. 데이터 임포트 후 실시간 연산(미)</h1>
+            <h1>12. 데이터 임포트 후 실시간 연산</h1>
             <div className={css["data-box"]}>
                 <table>
                     {table.map((v, i) => {
@@ -32,7 +36,7 @@ const Table = () => {
                     })}
                     <tr>
                         <td colSpan={5}>합계</td>
-                        <td>{"총합"}</td>
+                        <td>{totalSum}</td>
                     </tr>
                 </table>
             </div>
